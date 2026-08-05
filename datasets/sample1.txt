@@ -1,0 +1,1 @@
+Cryptography is the practice and study of techniques for secure communication in the presence of adversarial third parties. Modern cryptography exists at the intersection of the disciplines of mathematics, computer science, information theory, and systems engineering.
