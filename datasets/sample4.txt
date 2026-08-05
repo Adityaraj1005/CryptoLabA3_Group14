@@ -1,0 +1,1 @@
+Frequency analysis is the study of the frequency of letters or groups of letters in a ciphertext. The method is used as an aid to breaking classical ciphers based on the fact that certain letters occur much more frequently in plain text than others.
