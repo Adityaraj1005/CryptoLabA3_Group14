@@ -1,0 +1,1 @@
+Public key cryptography, or asymmetric cryptography, is a cryptographic system that uses pairs of keys. Public keys may be disseminated widely, while private keys are kept secret by the owner to perform secure encryption and digital signatures.
