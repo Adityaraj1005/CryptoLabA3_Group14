@@ -23,6 +23,18 @@ This project implements a lightweight, console-based Library Management System d
 
     ⚠️ Intentionally Implemented Vulnerabilities
 
+    1. **Missing Authorization / Broken Access Control:**
+   * **Location:** `src/app.py` inside administrative functions (Member Registration & Book Issue).
+   * **Flaw:** The application lacks access control checks, role verification, or authentication. Any user on the terminal can execute privileged admin     commands without providing credentials or proving elevated privileges.
+
+2. **Directory Traversal (Path Traversal):**
+   * **Location:** `src/app.py` inside the Book Catalog / Summary File Reader feature.
+   * **Flaw:** User input is directly appended to construct file paths without sanitization or directory sandboxing (e.g., `open(f"outputs/        {user_input}")`). An attacker can supply dot-dot-slash (`../`) relative path sequences to escape the designated output folder and read arbitrary files on the operating system.
+
+3. **Improper Input Validation:**
+   * **Location:** `src/app.py` inside the Fine Calculation feature.
+   * **Flaw:** Accepts unvalidated negative numerical inputs for overdue days without range checking. This causes logical state corruption where the system calculates negative fines (resulting in the library owing money to the user).
+
 
     📂 Directory Structure
 Plaintext
