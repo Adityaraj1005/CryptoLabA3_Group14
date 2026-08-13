@@ -1,1 +1,7 @@
-
+==================================================
+           LIBRARY SYSTEM ANNUAL REPORT           
+==================================================
+Total Books In System: 5
+Active Members: 2
+System Security Status: Operational (SAST Verified)
+==================================================
