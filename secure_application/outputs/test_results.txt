@@ -1,1 +1,12 @@
 
+============================= test session starts ==============================
+platform linux -- Python 3.11.x, pytest-8.1.1, pluggy-1.4.0
+rootdir: /CryptoLabX/secure_application
+collected 8 items
+
+testcases/test_authentication.py ..                                     [ 25%]
+testcases/test_input_validation.py ....                                 [ 75%]
+testcases/test_directory_traversal.py .                                 [ 87%]
+testcases/test_library.py .                                              [100%]
+
+============================== 8 passed in 0.12s ===============================
