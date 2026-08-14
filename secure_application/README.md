@@ -36,36 +36,51 @@ This project implements a lightweight, console-based Library Management System d
    * **Flaw:** Accepts unvalidated negative numerical inputs for overdue days without range checking. This causes logical state corruption where the system calculates negative fines (resulting in the library owing money to the user).
 
 ## 📂 Directory Structure
-
 ```text
-secure_application/
-├── src/                  # Source code (Library Management System)
-│   ├── app.py            # Main entry point
-│   ├── database.py       # SQLite database connection & setup
-│   ├── vulnerable_app.py # Vulnerable application logic
-│   ├── secure_version.py # Remediated application logic
-│   ├── validation.py     # Input and path validation functions
-│   └── requirements.txt  # Python dependencies
-├── reports/              # SAST reports & security documentation
-│   ├── security_report.md
-│   ├── missing_authentication.md
-│   ├── improper_input_validation.md
-│   └── directory_traversal.md
-├── screenshots/          # Execution proof and exploit screenshots
-├── sast/                 # SAST scan configuration and outputs
-│   ├── sast_report.md
-│   └── bandit_report.txt
-├── outputs/              # Application database and sample files
-│   ├── sample_report.txt
-│   └── library.db
-├── testcases/            # Automated unit tests and exploit suites
-│   ├── test_authentication.py
-│   ├── test_input_validation.py
-│   ├── test_directory_traversal.py
-│   └── test_library.py
-└── README.md             # Project documentation            # Project documentation
-
-
+CryptoLabX/
+│
+├── classical/
+├── modern/
+├── hashing/
+├── attacks/
+├── analysis/
+├── docs/
+│
+└── secure_application/
+    │
+    ├── src/
+    │   ├── app.py
+    │   ├── database.py
+    │   ├── vulnerable_app.py
+    │   ├── secure_version.py
+    │   ├── validation.py
+    │   └── requirements.txt
+    │
+    ├── reports/
+    │   ├── security_report.md
+    │   ├── missing_authentication.md
+    │   ├── improper_input_validation.md
+    │   └── directory_traversal.md
+    │
+    ├── screenshots/
+    │   └── .gitkeep
+    │
+    ├── sast/
+    │   ├── sast_report.md
+    │   └── bandit_report.txt
+    │
+    ├── outputs/
+    │   ├── sample_report.txt
+    │   └── test_results.txt
+    │
+    ├── testcases/
+    │   ├── test_authentication.py
+    │   ├── test_input_validation.py
+    │   ├── test_directory_traversal.py
+    │   └── test_library.py
+    │
+    └── README.md
+```
 
 🚀 How to Run the Application
 1. Install Dependencies
