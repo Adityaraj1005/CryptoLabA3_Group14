@@ -596,5 +596,5 @@ def secure_application():
                 "Invalid menu option."
             )
 
-    if __name__ == "__main__":
-        secure_application()
+if __name__ == "__main__":
+    secure_application()
