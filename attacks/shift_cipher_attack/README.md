@@ -25,18 +25,40 @@ How to Run
 First, navigate into the source folder from your terminal:
 Bash
 
+```bash
 cd attacks/shift_cipher_attack/src
+```
 
 1. Run the Full Driver Suite (main.py)
 
 Runs all test cases through both attacks and prints the final verification report:
 Bash
 
+```bash
 python3 main.py
+```
 
 2. Run Cipher Functions directly (shift_cipher.py)
 
 Tests basic encryption and decryption math:
 Bash
-
+```bash
 python3 shift_cipher.py
+```
+
+3. Run Dictionary Attack standalone (brute_force_dictionary.py)
+
+Tests word-matching key recovery on sample text:
+Bash
+
+```bash
+python3 brute_force_dictionary.py
+```
+
+4. Run Chi-Square Attack standalone (chi_square_attack.py)
+
+Tests statistical letter frequency key recovery on sample text:
+Bash
+```bash
+python3 chi_square_attack.py
+```
