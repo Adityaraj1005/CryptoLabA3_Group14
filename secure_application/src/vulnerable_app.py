@@ -1,9 +1,11 @@
-
 import os
-import sqlite3
-from datetime import datetime
 
-from database import get_connection
+from database import (
+    get_connection,
+    get_current_day,
+    set_current_day,
+    advance_day,
+)
 
 
 REPORTS_DIRECTORY = (
@@ -14,6 +16,55 @@ REPORTS_DIRECTORY = (
         "reports"
     )
 )
+
+
+def show_loans():
+    """Display all loans with their IDs and simulated days."""
+
+    connection = get_connection()
+
+    loans = connection.execute(
+        """
+        SELECT
+            loans.id AS loan_id,
+            books.title AS book_title,
+            members.name AS member_name,
+            loans.issue_day,
+            loans.return_day
+        FROM loans
+        JOIN books
+            ON loans.book_id = books.id
+        JOIN members
+            ON loans.member_id = members.id
+        ORDER BY loans.id
+        """
+    ).fetchall()
+
+    connection.close()
+
+    print("\n--- LOANS ---")
+
+    if not loans:
+        print("No loans found.")
+        return
+
+    for loan in loans:
+
+        status = (
+            "Returned"
+            if loan["return_day"] is not None
+            else "Active"
+        )
+
+        print(
+            f"Loan ID   : {loan['loan_id']}\n"
+            f"  Book    : {loan['book_title']}\n"
+            f"  Member  : {loan['member_name']}\n"
+            f"  Issue Day: {loan['issue_day']}\n"
+            f"  Return Day: "
+            f"{loan['return_day'] if loan['return_day'] else '-'}\n"
+            f"  Status  : {status}\n"
+        )
 
 
 def show_books():
@@ -29,6 +80,10 @@ def show_books():
 
     print("\n--- BOOKS ---")
 
+    if not books:
+        print("No books found.")
+        return
+
     for book in books:
 
         status = (
@@ -38,10 +93,128 @@ def show_books():
         )
 
         print(
-            f"{book['id']}. "
+            f"ID: {book['id']} | "
             f"{book['title']} - "
             f"{book['author']} "
             f"[{status}]"
+        )
+
+
+def show_members():
+    """Display all members and their IDs."""
+
+    connection = get_connection()
+
+    members = connection.execute(
+        """
+        SELECT id, name, email
+        FROM members
+        ORDER BY id
+        """
+    ).fetchall()
+
+    connection.close()
+
+    print("\n--- MEMBERS ---")
+
+    if not members:
+        print("No members found.")
+        return
+
+    for member in members:
+
+        print(
+            f"ID: {member['id']} | "
+            f"Name: {member['name']} | "
+            f"Email: {member['email']}"
+        )
+
+
+def show_current_day():
+    """Display the current simulated application day."""
+
+    print(
+        f"\nCurrent simulated day: "
+        f"Day {get_current_day()}"
+    )
+
+
+def change_application_day():
+    """Advance or set the simulated application day."""
+
+    current_day = get_current_day()
+
+    print(
+        f"\nCurrent simulated day: Day {current_day}"
+    )
+
+    print(
+        """
+1. Advance days
+2. Set exact day
+"""
+    )
+
+    choice = input(
+        "Select an option: "
+    )
+
+    try:
+
+        if choice == "1":
+
+            days = int(
+                input(
+                    "Advance by how many days: "
+                )
+            )
+
+            if days <= 0:
+
+                print(
+                    "Days must be greater than zero."
+                )
+
+                return
+
+            new_day = advance_day(days)
+
+            print(
+                f"Application day is now "
+                f"Day {new_day}."
+            )
+
+        elif choice == "2":
+
+            day = int(
+                input(
+                    "Enter application day: "
+                )
+            )
+
+            if day < current_day:
+
+                print(
+                    "You cannot move the clock backwards."
+                )
+
+                return
+
+            set_current_day(day)
+
+            print(
+                f"Application day is now "
+                f"Day {day}."
+            )
+
+        else:
+
+            print("Invalid option.")
+
+    except ValueError as error:
+
+        print(
+            f"Input error: {error}"
         )
 
 
@@ -77,10 +250,14 @@ def search_books():
 
     print("\n--- SEARCH RESULTS ---")
 
+    if not books:
+        print("No books found.")
+        return
+
     for book in books:
 
         print(
-            f"{book['id']}. "
+            f"ID: {book['id']} | "
             f"{book['title']} - "
             f"{book['author']}"
         )
@@ -131,12 +308,62 @@ def issue_book():
     integers or whether the entities exist.
     """
 
+    print("\n--- AVAILABLE BOOKS ---")
+
+    connection = get_connection()
+
+    books = connection.execute(
+        """
+        SELECT *
+        FROM books
+        WHERE available = 1
+        ORDER BY id
+        """
+    ).fetchall()
+
+    connection.close()
+
+    if not books:
+
+        print("No books are currently available.")
+        return
+
+    for book in books:
+
+        print(
+            f"ID: {book['id']} | "
+            f"{book['title']} - "
+            f"{book['author']}"
+        )
+
     book_id = int(
-        input("Enter book ID: ")
+        input("\nEnter book ID: ")
     )
 
+    print("\n--- MEMBERS ---")
+
+    connection = get_connection()
+
+    members = connection.execute(
+        """
+        SELECT id, name, email
+        FROM members
+        ORDER BY id
+        """
+    ).fetchall()
+
+    connection.close()
+
+    for member in members:
+
+        print(
+            f"ID: {member['id']} | "
+            f"{member['name']} | "
+            f"{member['email']}"
+        )
+
     member_id = int(
-        input("Enter member ID: ")
+        input("\nEnter member ID: ")
     )
 
     connection = get_connection()
@@ -150,9 +377,24 @@ def issue_book():
         (book_id,),
     ).fetchone()
 
+    member = connection.execute(
+        """
+        SELECT *
+        FROM members
+        WHERE id = ?
+        """,
+        (member_id,),
+    ).fetchone()
+
     if not book:
 
         print("Book does not exist.")
+        connection.close()
+        return
+
+    if not member:
+
+        print("Member does not exist.")
         connection.close()
         return
 
@@ -162,19 +404,21 @@ def issue_book():
         connection.close()
         return
 
+    current_day = get_current_day()
+
     connection.execute(
         """
         INSERT INTO loans(
             book_id,
             member_id,
-            issue_date
+            issue_day
         )
         VALUES (?, ?, ?)
         """,
         (
             book_id,
             member_id,
-            datetime.now().isoformat(),
+            current_day,
         ),
     )
 
@@ -188,9 +432,47 @@ def issue_book():
     )
 
     connection.commit()
+
+    loan = connection.execute(
+        """
+        SELECT id
+        FROM loans
+        WHERE book_id = ?
+          AND member_id = ?
+          AND issue_day = ?
+        ORDER BY id DESC
+        LIMIT 1
+        """,
+        (
+            book_id,
+            member_id,
+            current_day,
+        ),
+    ).fetchone()
+
     connection.close()
 
-    print("Book issued successfully.")
+    print("\n--- LOAN CREATED ---")
+
+    print(
+        f"Loan ID   : {loan['id']}"
+    )
+
+    print(
+        f"Book      : {book['title']}"
+    )
+
+    print(
+        f"Member    : {member['name']}"
+    )
+
+    print(
+        f"Issue Day : Day {current_day}"
+    )
+
+    print(
+        "Status    : Active"
+    )
 
 
 def return_book():
@@ -202,8 +484,10 @@ def return_book():
     validation.
     """
 
+    show_loans()
+
     loan_id = int(
-        input("Enter loan ID: ")
+        input("\nEnter loan ID: ")
     )
 
     connection = get_connection()
@@ -213,7 +497,7 @@ def return_book():
         SELECT *
         FROM loans
         WHERE id = ?
-          AND return_date IS NULL
+          AND return_day IS NULL
         """,
         (loan_id,),
     ).fetchone()
@@ -224,14 +508,16 @@ def return_book():
         connection.close()
         return
 
+    current_day = get_current_day()
+
     connection.execute(
         """
         UPDATE loans
-        SET return_date = ?
+        SET return_day = ?
         WHERE id = ?
         """,
         (
-            datetime.now().isoformat(),
+            current_day,
             loan_id,
         ),
     )
@@ -248,19 +534,24 @@ def return_book():
     connection.commit()
     connection.close()
 
-    print("Book returned successfully.")
+    print(
+        f"Book returned successfully "
+        f"on Day {current_day}."
+    )
 
 
 def calculate_fine():
     """
     Calculates a simple fine.
 
-    Fine:
-    2 currency units per day after 7 days.
+    First 7 days are free.
+    Fine is ₹2 per overdue day.
     """
 
+    show_loans()
+
     loan_id = int(
-        input("Enter loan ID: ")
+        input("\nEnter loan ID: ")
     )
 
     connection = get_connection()
@@ -274,19 +565,18 @@ def calculate_fine():
         (loan_id,),
     ).fetchone()
 
+    connection.close()
+
     if not loan:
 
         print("Loan not found.")
-        connection.close()
         return
 
-    issue_date = datetime.fromisoformat(
-        loan["issue_date"]
-    )
+    current_day = get_current_day()
 
     days = (
-        datetime.now() - issue_date
-    ).days
+        current_day - loan["issue_day"]
+    )
 
     overdue_days = max(
         0,
@@ -296,10 +586,32 @@ def calculate_fine():
     fine = overdue_days * 2
 
     print(
-        f"Fine: ₹{fine}"
+        "\n--- FINE CALCULATION ---"
     )
 
-    connection.close()
+    print(
+        f"Loan ID       : {loan['id']}"
+    )
+
+    print(
+        f"Issue Day     : Day {loan['issue_day']}"
+    )
+
+    print(
+        f"Current Day   : Day {current_day}"
+    )
+
+    print(
+        f"Days Borrowed : {days}"
+    )
+
+    print(
+        f"Overdue Days  : {overdue_days}"
+    )
+
+    print(
+        f"Fine          : ₹{fine}"
+    )
 
 
 def download_report():
@@ -371,6 +683,11 @@ def vulnerable_application():
     )
 
     print(
+        f"\nCURRENT APPLICATION DAY: "
+        f"Day {get_current_day()}"
+    )
+
+    print(
         "\nWARNING: "
         "This is the intentionally vulnerable "
         "version for security testing."
@@ -380,14 +697,22 @@ def vulnerable_application():
 
         print(
             """
-1. Show books
-2. Search books
-3. Register member
-4. Issue book
-5. Return book
-6. Calculate fine
-7. Download report
-8. Exit
+================================
+            MENU
+================================
+
+1.  Show books
+2.  Show members
+3.  Search books
+4.  Register member
+5.  Issue book
+6.  Return book
+7.  Show loans
+8.  Calculate fine
+9.  Download report
+10. Show current day
+11. Change application day
+12. Exit
 """
         )
 
@@ -401,33 +726,51 @@ def vulnerable_application():
 
         elif choice == "2":
 
-            search_books()
+            show_members()
 
         elif choice == "3":
 
-            register_member()
+            search_books()
 
         elif choice == "4":
 
-            issue_book()
+            register_member()
 
         elif choice == "5":
 
-            return_book()
+            issue_book()
 
         elif choice == "6":
 
-            calculate_fine()
+            return_book()
 
         elif choice == "7":
 
-            download_report()
+            show_loans()
 
         elif choice == "8":
+
+            calculate_fine()
+
+        elif choice == "9":
+
+            download_report()
+
+        elif choice == "10":
+
+            show_current_day()
+
+        elif choice == "11":
+
+            change_application_day()
+
+        elif choice == "12":
 
             print("Goodbye.")
             break
 
         else:
 
-            print("Invalid menu option.")
+            print(
+                "Invalid menu option."
+            )
