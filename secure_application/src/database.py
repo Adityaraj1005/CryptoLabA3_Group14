@@ -94,3 +94,9 @@ def initialize_database():
 
     connection.commit()
     connection.close()
+
+
+def get_current_day():
+    """Returns the current date formatted as YYYY-MM-DD."""
+    from datetime import datetime
+    return datetime.now().strftime("%Y-%m-%d")
