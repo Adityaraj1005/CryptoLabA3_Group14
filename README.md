@@ -12,19 +12,42 @@ Members:->
 The repository is organized to support future cryptographic implementations and attacks:
 
 ```text
-CryptoLabX_Group14/
+CryptoLabA3_Group14/
 │
-├── classical/            # Future module: Implementation of classical ciphers (Caesar, Vigenère, etc.)
-├── attacks/              # Future module: Cryptanalysis and breaking ciphers
-├── math/                 # Future module: Mathematical foundations (Number theory, modular arithmetic)
-├── modern/               # Future module: Modern encryption schemes (AES, DES, RSA)
-├── analysis/             # Future module: Advanced statistical analysis of ciphertexts
-├── datasets/             # Contains at least five text files used for analysis and testing
-├── outputs/              # Directory for storing generated ciphertexts and attack results
-├── docs/                 # Additional project documentation and reports
-├── tests/                # Unit tests for cryptographic functions
-├── utils/                # Helper modules (e.g., logger.py, file_analysis.py)
+├── attacks/
+│   └── shift_cipher_attack/        # [Lab 4 Module]
+│       ├── src/
+│       │   ├── shift_cipher.py
+│       │   ├── brute_force_dictionary.py
+│       │   ├── chi_square_attack.py
+│       │   └── main.py
+│       ├── dictionary/
+│       │   └── english_words.txt
+│       ├── testcases/
+│       │   └── test.txt
+│       ├── outputs/
+│       ├── screenshots/
+│       ├── reports/
+│       │   └── Assignment_4_Report.pdf
+│       └── README.md
 │
-├── main.py               # Main entry point and CLI menu controller
-├── requirements.txt      # Python dependencies required for the project
-└── README.md             # Project documentation (this file)
+├── secure_application/             # [Lab 3 Module]
+│   └── src/
+│       ├── app.py
+│       ├── vulnerable_app.py
+│       ├── secure_app.py
+│       └── database.py
+│
+├── classical/                      # [Lab 1 Base Directory]
+├── math/
+├── modern/
+├── analysis/
+├── datasets/
+├── outputs/
+├── docs/
+├── tests/
+├── utils/
+│
+├── main.py
+├── requirements.txt
+└── README.md
