@@ -1,26 +1,23 @@
-
 import sqlite3
 from pathlib import Path
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASE = BASE_DIR / "library.db"
 
+# Track simulated application day
+CURRENT_DAY = 1
+
 
 def get_connection():
     """Return a connection to the library database."""
-
     connection = sqlite3.connect(DATABASE)
     connection.row_factory = sqlite3.Row
-
     return connection
 
 
 def initialize_database():
     """Create tables and insert sample data."""
-
     connection = get_connection()
-
     cursor = connection.cursor()
 
     cursor.executescript(
@@ -42,30 +39,19 @@ def initialize_database():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             book_id INTEGER NOT NULL,
             member_id INTEGER NOT NULL,
-            issue_date TEXT NOT NULL,
-            return_date TEXT,
+            issue_day INTEGER NOT NULL,
+            return_day INTEGER,
             fine REAL DEFAULT 0,
-
-            FOREIGN KEY(book_id)
-                REFERENCES books(id),
-
-            FOREIGN KEY(member_id)
-                REFERENCES members(id)
+            FOREIGN KEY(book_id) REFERENCES books(id),
+            FOREIGN KEY(member_id) REFERENCES members(id)
         );
         """
     )
 
-    book_count = cursor.execute(
-        "SELECT COUNT(*) FROM books"
-    ).fetchone()[0]
-
+    book_count = cursor.execute("SELECT COUNT(*) FROM books").fetchone()[0]
     if book_count == 0:
-
         cursor.executemany(
-            """
-            INSERT INTO books(title, author)
-            VALUES (?, ?)
-            """,
+            "INSERT INTO books(title, author) VALUES (?, ?)",
             [
                 ("The Hobbit", "J.R.R. Tolkien"),
                 ("1984", "George Orwell"),
@@ -75,17 +61,10 @@ def initialize_database():
             ],
         )
 
-    member_count = cursor.execute(
-        "SELECT COUNT(*) FROM members"
-    ).fetchone()[0]
-
+    member_count = cursor.execute("SELECT COUNT(*) FROM members").fetchone()[0]
     if member_count == 0:
-
         cursor.executemany(
-            """
-            INSERT INTO members(name, email)
-            VALUES (?, ?)
-            """,
+            "INSERT INTO members(name, email) VALUES (?, ?)",
             [
                 ("Alice", "alice@example.com"),
                 ("Bob", "bob@example.com"),
@@ -97,6 +76,20 @@ def initialize_database():
 
 
 def get_current_day():
-    """Returns the current date formatted as YYYY-MM-DD."""
-    from datetime import datetime
-    return datetime.now().strftime("%Y-%m-%d")
+    """Returns current simulated day integer."""
+    global CURRENT_DAY
+    return CURRENT_DAY
+
+
+def set_current_day(day):
+    """Sets current simulated day integer."""
+    global CURRENT_DAY
+    CURRENT_DAY = int(day)
+    return CURRENT_DAY
+
+
+def advance_day(days):
+    """Advances current simulated day integer."""
+    global CURRENT_DAY
+    CURRENT_DAY += int(days)
+    return CURRENT_DAY
