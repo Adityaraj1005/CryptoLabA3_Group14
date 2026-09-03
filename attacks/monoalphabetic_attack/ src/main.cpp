@@ -1,5 +1,8 @@
-
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <map>
+#include <cctype>
 #include "cryptanalysis.h"
 
 using namespace std;
@@ -19,15 +22,6 @@ int main() {
     string random_key = generate_random_key();
     string ciphertext = encrypt_monoalphabetic(plaintext, random_key);
 
-    cout << "=======================================================\n";
-    cout << "          MONOALPHABETIC CRYPTANALYSIS MODULE          \n";
-    cout << "=======================================================\n";
-    cout << "\n[Generated Ciphertext Snippet]:\n" << ciphertext.substr(0, 200) << "...\n";
-
-    frequency_analysis(ciphertext);
-    word_frequency_analysis(ciphertext);
-    pattern_analysis(ciphertext);
-
     map<char, char> key_map;
 
     ifstream keyfile("keymap.txt");
@@ -37,8 +31,11 @@ int main() {
             key_map[toupper(c)] = tolower(p);
         }
         keyfile.close();
-        cout << "\n[INFO] Loaded " << key_map.size() << " character mappings from keymap.txt\n";
     }
+
+    frequency_analysis(ciphertext);
+    word_frequency_analysis(ciphertext);
+    pattern_analysis(ciphertext);
 
     char cipher_char, plain_char;
     int choice;
@@ -46,7 +43,12 @@ int main() {
     while (true) {
         string partial = apply_substitution(ciphertext, key_map);
 
-        cout << "\nCurrent Mappings (" << key_map.size() << "/26): ";
+        cout << "\n=======================================================\n";
+        cout << " [PREVIEW OF DECRYPTED TEXT (First 150 chars)]:\n ";
+        cout << partial.substr(0, 150) << "...\n";
+        cout << "=======================================================\n";
+
+        cout << "Current Mappings (" << key_map.size() << "/26): ";
         for (const auto& p : key_map) cout << p.first << "->" << p.second << " ";
         cout << "\n\nOptions:\n1. Add/Update Mapping\n2. Remove Mapping\n3. Verify Solution & Display Full Report\n4. Exit\nChoice: ";
         if (!(cin >> choice)) break;
@@ -62,6 +64,8 @@ int main() {
         } else if (choice == 3) {
             bool valid = verify_solution(ciphertext, partial, key_map);
             if (valid) {
+                print_decision_table();
+
                 cout << "\n=======================================================\n";
                 cout << "        FINAL CRYPTANALYSIS & DECRYPTION REPORT        \n";
                 cout << "=======================================================\n\n";
