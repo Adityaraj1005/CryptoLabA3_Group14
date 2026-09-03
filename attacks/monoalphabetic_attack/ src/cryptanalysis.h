@@ -1,14 +1,18 @@
-#pragma once
-#include <bits/stdc++.h>
+#ifndef CRYPTANALYSIS_H
+#define CRYPTANALYSIS_H
 
-using namespace std;
+#include <string>
+#include <map>
+#include <vector>
 
-string encrypt_monoalphabetic(const string& plaintext, const string& key);
-string generate_random_key();
+std::string generate_random_key();
+std::string encrypt_monoalphabetic(const std::string& plaintext, const std::string& key);
+std::string apply_substitution(const std::string& ciphertext, const std::map<char, char>& key_map);
+bool verify_solution(const std::string& original_ciphertext, const std::string& decrypted_text, const std::map<char, char>& key_map);
 
-void frequency_analysis(const string& ciphertext);
-void word_frequency_analysis(const string& ciphertext);
-void pattern_analysis(const string& ciphertext);
-string apply_substitution(const string& ciphertext, const map<char, char>& key_map);
-void display_partial_plaintext(const string& partial_text);
-bool verify_solution(const string& original_ciphertext, const string& recovered_plaintext, const map<char, char>& key_map);
+void frequency_analysis(const std::string& ciphertext);
+void word_frequency_analysis(const std::string& ciphertext);
+void pattern_analysis(const std::string& ciphertext);
+void print_decision_table();
+
+#endif
