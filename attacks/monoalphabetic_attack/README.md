@@ -8,15 +8,16 @@ A C++17 command-line tool designed for frequency analysis, interactive cryptanal
 
 ```text
 CryptoLabA3_Group14/
-│
-├── .gitignore
-├── README.md
-│
-├── src/
-│   ├── main.cpp            # Primary application driver & terminal interface
-│   ├── cryptanalysis.cpp   # Statistical engines & verification logic
-│   └── cryptanalysis.h     # Function prototypes & data structures
-│
-└── data/
-    ├── katz_lindell_p44.txt # Dataset plaintext file
-    └── keymap.txt           # Substitution key database file
+└── attacks/
+    └── monoalphabetic_attack/
+        ├── .gitignore
+        ├── README.md
+        │
+        ├── src/
+        │   ├── main.cpp            # Primary application driver & terminal interface
+        │   ├── cryptanalysis.cpp   # Statistical engines & verification logic
+        │   └── cryptanalysis.h     # Function prototypes & data structures
+        │
+        └── data/
+            ├── katz_lindell_p44.txt # Dataset plaintext file
+            └── keymap.txt           # Substitution key database file
