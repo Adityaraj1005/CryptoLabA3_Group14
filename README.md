@@ -15,7 +15,7 @@ The repository is organized to support future cryptographic implementations and 
 CryptoLabA3_Group14/
 │
 ├── analysis/
-│   └── Vignere_analysis/           # [Vigenère Cryptanalysis Module]
+│   └── Vignere_analysis/           # [Lab 3 - Vigenère Cryptanalysis Module]
 │       ├── .gitignore
 │       ├── README.md
 │       ├── ciphertext.txt
@@ -23,7 +23,15 @@ CryptoLabA3_Group14/
 │       └── screenshots/
 │
 ├── attacks/
-│   └── shift_cipher_attack/        # [Lab 4 Module]
+│   ├── monoalphabetic_attack/      # [Lab 4 - Monoalphabetic Cipher Attack]
+│   │   ├── .gitignore
+│   │   ├── README.md
+│   │   ├── ciphertext.txt
+│   │   ├── plaintext.txt           # Katz & Lindell (Page 44)
+│   │   ├── main.cpp
+│   │   └── screenshots/
+│   │
+│   └── shift_cipher_attack/        # [Lab 4 - Shift Cipher Attack Module]
 │       ├── src/
 │       │   ├── shift_cipher.py
 │       │   ├── brute_force_dictionary.py
@@ -56,7 +64,5 @@ CryptoLabA3_Group14/
 ├── utils/
 │
 ├── main.py
-├── requirements.txt
-└── README.md
 ├── requirements.txt
 └── README.md
