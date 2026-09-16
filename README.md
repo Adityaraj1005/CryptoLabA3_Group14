@@ -14,6 +14,14 @@ The repository is organized to support future cryptographic implementations and 
 ```text
 CryptoLabA3_Group14/
 │
+├── analysis/
+│   └── Vignere_analysis/           # [Vigenère Cryptanalysis Module]
+│       ├── .gitignore
+│       ├── README.md
+│       ├── ciphertext.txt
+│       ├── main.cpp
+│       └── screenshots/
+│
 ├── attacks/
 │   └── shift_cipher_attack/        # [Lab 4 Module]
 │       ├── src/
@@ -41,7 +49,6 @@ CryptoLabA3_Group14/
 ├── classical/                      # [Lab 1 Base Directory]
 ├── math/
 ├── modern/
-├── analysis/
 ├── datasets/
 ├── outputs/
 ├── docs/
@@ -49,5 +56,7 @@ CryptoLabA3_Group14/
 ├── utils/
 │
 ├── main.py
+├── requirements.txt
+└── README.md
 ├── requirements.txt
 └── README.md
