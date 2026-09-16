@@ -15,7 +15,7 @@ The repository is organized to support future cryptographic implementations and 
 CryptoLabA3_Group14/
 │
 ├── analysis/
-│   └── Vignere_analysis/           # [Lab 3 - Vigenère Cryptanalysis Module]
+│   └── Vignere_analysis/           # [Lab 6 - Vigenère Cryptanalysis Module]
 │       ├── .gitignore
 │       ├── README.md
 │       ├── ciphertext.txt
@@ -23,7 +23,7 @@ CryptoLabA3_Group14/
 │       └── screenshots/
 │
 ├── attacks/
-│   ├── monoalphabetic_attack/      # [Lab 4 - Monoalphabetic Cipher Attack]
+│   ├── monoalphabetic_attack/      # [Lab 5 - Monoalphabetic Cipher Attack]
 │   │   ├── .gitignore
 │   │   ├── README.md
 │   │   ├── ciphertext.txt
