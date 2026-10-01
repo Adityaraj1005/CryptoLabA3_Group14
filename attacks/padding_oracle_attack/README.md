@@ -29,7 +29,7 @@ $$I_i[k] = C'_{i-1}[k] \oplus \text{Target\_Pad}$$
 
 Once $I_i[k]$ is known, the original plaintext byte $P_i[k]$ is recovered using the unmodified original ciphertext byte $C_{i-1}[k]$:
 
-$$I_i[k] = C'_{i-1}[k] \oplus \text{Pad}$$
+$$P_i[k] = I_i[k] \oplus C_{i-1}[k]$$
 
 ---
 
