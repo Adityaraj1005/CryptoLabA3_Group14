@@ -1,21 +1,29 @@
-Group No-14
-Batch-A3
-Members:->
-1.)Rishi Yadav-2024ucp1601
-2.)Adityaraj Shyamsundar Bhandari-2024ucp1639
+# CryptoLabX Toolkit
 
 **Course:** Cryptography Laboratory (22CPP307)  
-**Assignment:** Assignment 1- Build Your CryptoLabX Toolkit
+**Assignment:** Assignment 1 - Build Your CryptoLabX Toolkit  
+
+---
+
+## 👥 Group Information
+
+* **Group No:** 14
+* **Batch:** A3
+* **Members:**
+  1. **Rishi Yadav** (`2024ucp1601`)
+  2. **Adityaraj Shyamsundar Bhandari** (`2024ucp1639`)
+
+---
 
 ## 📂 Project Structure
 
-The repository is organized to support future cryptographic implementations and attacks:
+The repository is organized into distinct laboratory modules and attack demonstrations:
 
 ```text
 CryptoLabA3_Group14/
 │
 ├── analysis/
-│   └── Vignere_analysis/           # [Lab 6 - Vigenère Cryptanalysis Module]
+│   └── Vignere_analysis/          # [Lab 6 - Vigenère Cryptanalysis Module]
 │       ├── .gitignore
 │       ├── README.md
 │       ├── ciphertext.txt
@@ -23,15 +31,21 @@ CryptoLabA3_Group14/
 │       └── screenshots/
 │
 ├── attacks/
-│   ├── monoalphabetic_attack/      # [Lab 5 - Monoalphabetic Cipher Attack]
+│   ├── monoalphabetic_attack/     # [Lab 5 - Monoalphabetic Cipher Attack]
 │   │   ├── .gitignore
 │   │   ├── README.md
 │   │   ├── ciphertext.txt
-│   │   ├── plaintext.txt           # Katz & Lindell (Page 44)
+│   │   ├── plaintext.txt          # Katz & Lindell (Page 44)
 │   │   ├── main.cpp
 │   │   └── screenshots/
 │   │
-│   └── shift_cipher_attack/        # [Lab 4 - Shift Cipher Attack Module]
+│   ├── padding_oracle_attack/     # [Lab 7 - AES-CBC Padding Oracle Attack]
+│   │   ├── .gitignore
+│   │   ├── README.md
+│   │   ├── main.py
+│   │   └── screenshots/
+│   │
+│   └── shift_cipher_attack/       # [Lab 4 - Shift Cipher Attack Module]
 │       ├── src/
 │       │   ├── shift_cipher.py
 │       │   ├── brute_force_dictionary.py
@@ -47,14 +61,14 @@ CryptoLabA3_Group14/
 │       │   └── Assignment_4_Report.pdf
 │       └── README.md
 │
-├── secure_application/             # [Lab 3 Module]
+├── secure_application/            # [Lab 3 Module]
 │   └── src/
 │       ├── app.py
 │       ├── vulnerable_app.py
 │       ├── secure_app.py
 │       └── database.py
 │
-├── classical/                      # [Lab 1 Base Directory]
+├── classical/                     # [Lab 1 Base Directory]
 ├── math/
 ├── modern/
 ├── datasets/
