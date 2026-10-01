@@ -13,7 +13,7 @@ The implementation models a realistic threat scenario where a server/oracle decr
 ## 📐 Mathematical & Theoretical Foundation
 
 ### 1. AES-CBC Decryption Mechanics
-In Cipher Block Chaining (CBC) decryption, ciphertext block $C_i$ is passed through the block cipher decryption function $D_K$ to yield an intermediate byte array $I_i$. $I_i$ is then XORed with the preceding ciphertext block $C_{i-1}$ (or the $\text{IV}$ for $C_1$) to derive plaintext block $P_i$:
+In Cipher Block Chaining (CBC) decryption, ciphertext block $C_i$ is passed through the block cipher decryption function $D_K$ to yield an intermediate byte array $I_i$. $I_i$ is then XORed with the preceding ciphertext block $C_{i-1}$ (or the IV for $C_1$) to derive plaintext block $P_i$:
 
 $$I_i = D_K(C_i)$$
 $$P_i = I_i \oplus C_{i-1}$$
@@ -25,7 +25,7 @@ $$P'_i[k] = I_i[k] \oplus C'_{i-1}[k]$$
 
 By systematically testing values for $C'_{i-1}[k]$ until the Oracle signals **valid PKCS#7 padding** (e.g., target pad byte `0x01`), the intermediate value $I_i[k]$ is isolated:
 
-$$I_i[k] = C'_{i-1}[k] \oplus \text{Target\_Pad}$$
+$$I_i[k] = C'_{i-1}[k] \oplus \text{Pad}$$
 
 Once $I_i[k]$ is known, the original plaintext byte $P_i[k]$ is recovered using the unmodified original ciphertext byte $C_{i-1}[k]$:
 
