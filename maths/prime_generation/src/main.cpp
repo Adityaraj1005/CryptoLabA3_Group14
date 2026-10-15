@@ -3,6 +3,8 @@
 #include <random>
 #include <chrono>
 #include <vector>
+#include <openssl/bn.h>
+#include <openssl/err.h>
 
 using namespace std;
 using namespace boost::multiprecision;
@@ -98,6 +100,39 @@ bool millerRabin(cpp_int n, int rounds,
     return true;
 }
 
+
+int independentVerification(const cpp_int& number)
+{
+    string decimal = number.convert_to<string>();
+
+    BIGNUM *bn = nullptr;
+
+    if (BN_dec2bn(&bn, decimal.c_str()) == 0 || bn == nullptr)
+    {
+        BN_free(bn);
+        return -1;
+    }
+
+    BN_CTX *ctx = BN_CTX_new();
+
+    if (ctx == nullptr)
+    {
+        BN_free(bn);
+        return -1;
+    }
+
+    int result = BN_is_prime_ex(bn, 20, ctx, nullptr);
+
+    BN_free(bn);
+    BN_CTX_free(ctx);
+
+    return result;
+}
+
+
+
+
+
 int main()
 {
     int bits = 512;
@@ -166,6 +201,23 @@ int main()
     cout << "Passes Miller-Rabin: "
          << millerRabin(prime, rounds, checkBases)
          << endl;
+int independentResult = independentVerification(prime);
+
+if (independentResult == 1)
+{
+    cout << "Independent verification (OpenSSL): Passed";
+    cout << " - probable prime" << endl;
+}
+else if (independentResult == 0)
+{
+    cout << "Independent verification (OpenSSL): Failed";
+    cout << " - composite number" << endl;
+}
+else
+{
+    cout << "Independent verification (OpenSSL): Error";
+    cout << " - check OpenSSL installation" << endl;
+}
 
     return 0;
 }
