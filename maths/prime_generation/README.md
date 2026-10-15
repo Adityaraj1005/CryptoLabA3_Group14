@@ -17,11 +17,3 @@ g++ assign8.cpp -o assign8 -std=c++17 -lcrypto
 ```
 
 This links the program with OpenSSL's crypto library. The source uses `BN_is_prime_ex()`, which is available in OpenSSL 1.1.1. The function is deprecated in OpenSSL 3.x, where `BN_check_prime()` is preferred.
-
-## Before submitting
-1. Run the program after compiling it with `-lcrypto`.
-2. Copy the actual OpenSSL verification result and the new run's timing/candidate counts into `outputs/experimental_results.txt`.
-3. Save screenshots of compilation and the final output in `screenshots/`.
-4. Check that the report's recorded values match the run you are submitting.
-
-A successful OpenSSL check is an independent implementation check, but it is still probabilistic rather than a formal mathematical proof of primality.
