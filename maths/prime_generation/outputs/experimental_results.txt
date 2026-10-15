@@ -1,6 +1,8 @@
 Miller–Rabin Prime Generation — Experimental Results
 =====================================================
 
+Recorded run from the original program (before adding the OpenSSL check)
+-----------------------------------------------------------------------
 Assigned bit length: 512
 Generated candidate:
 10900977171346248951540587522258328704597826508010937985227308334392781719114223955326659568613139277331049511512858191334672276525005145177621981384465167
@@ -10,11 +12,11 @@ Number of candidates tested: 25
 Miller–Rabin rounds configured: 20
 Execution time: 0.14621 seconds
 
-Program verification output:
+Original program verification:
 - Correct bit length: 1 (true)
 - Passes Miller–Rabin: 1 (true)
 
-Miller–Rabin bases printed by the program:
+Miller–Rabin bases printed by the original program:
 1. 771017646
 2. 899449856
 3. 136861678
@@ -36,12 +38,23 @@ Miller–Rabin bases printed by the program:
 19. 692573047
 20. 179753473
 
-Independent verification:
-- Method: NOT YET RECORDED
-- Result: NOT YET RECORDED
+Independent verification with OpenSSL
+--------------------------------------
+OpenSSL version: OpenSSL 1.1.1f (reported by user)
+Function used: BN_is_prime_ex()
+Result: PENDING — run the updated program and record the actual output.
 
-Notes:
-- These results are from one execution; generated values and timing may differ on a later run.
-- A value of 1 in the C++ output represents Boolean true.
-- A second Miller–Rabin run is not an independent verification method.
-- Before submitting, fill in the independent-verification method and result using a separate trusted implementation.
+Updated run details
+-------------------
+Generated candidate:
+Actual bit length:
+Number of candidates tested:
+Miller–Rabin rounds:
+Execution time:
+OpenSSL verification result:
+
+Important:
+- The recorded timing and candidate count above belong to the earlier run, before OpenSSL verification was added. They are not the timing/count for the updated program.
+- A printed Boolean value of 1 means true.
+- Only mark OpenSSL verification as passed if the updated program actually returns 1.
+- BN_is_prime_ex() returns 1 for probable prime, 0 for composite, and a negative value for an error.
