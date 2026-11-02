@@ -22,30 +22,29 @@ The repository is organized into distinct laboratory modules and attack demonstr
 ```text
 CryptoLabA3_Group14/
 │
-├── analysis/
-│   └── Vignere_analysis/          # [Lab 6 - Vigenère Cryptanalysis Module]
-│       ├── .gitignore
-│       ├── README.md
-│       ├── ciphertext.txt
-│       ├── main.cpp
-│       └── screenshots/
+├── analysis/                             # [Lab 6 - Vigenère Cryptanalysis Module]
+│   ├── .gitignore
+│   ├── README.md
+│   ├── ciphertext.txt
+│   ├── main.cpp
+│   └── screenshots/
 │
 ├── attacks/
-│   ├── monoalphabetic_attack/     # [Lab 5 - Monoalphabetic Cipher Attack]
+│   ├── monoalphabetic_attack/            # [Lab 5 - Monoalphabetic Cipher Attack]
 │   │   ├── .gitignore
 │   │   ├── README.md
 │   │   ├── ciphertext.txt
-│   │   ├── plaintext.txt          # Katz & Lindell (Page 44)
+│   │   ├── plaintext.txt                 # Katz & Lindell (Page 44)
 │   │   ├── main.cpp
 │   │   └── screenshots/
 │   │
-│   ├── padding_oracle_attack/     # [Lab 7 - AES-CBC Padding Oracle Attack]
+│   ├── padding_oracle_attack/            # [Lab 7 - AES-CBC Padding Oracle Attack]
 │   │   ├── .gitignore
 │   │   ├── README.md
 │   │   ├── main.py
 │   │   └── screenshots/
 │   │
-│   └── shift_cipher_attack/       # [Lab 4 - Shift Cipher Attack Module]
+│   └── shift_cipher_attack/              # [Lab 4 - Shift Cipher Attack Module]
 │       ├── src/
 │       │   ├── shift_cipher.py
 │       │   ├── brute_force_dictionary.py
@@ -61,15 +60,39 @@ CryptoLabA3_Group14/
 │       │   └── Assignment_4_Report.pdf
 │       └── README.md
 │
-├── secure_application/            # [Lab 3 Module]
+├── maths/                                # [Lab Module - Cryptographic Mathematics]
+│   ├── Random_Generator/                 # [Lab 9 - CSPRNG Statistical Analysis]
+│   │   ├── screenshots/
+│   │   │   └── .gitkeep
+│   │   ├── .gitkeep
+│   │   ├── README.md
+│   │   ├── analyze_randomness.ipynb
+│   │   └── generate_random_data.py
+│   │
+│   └── prime_generation/                 # [Lab 8 - 512-Bit Miller-Rabin Prime Generation]
+│       ├── outputs/
+│       │   └── experimental_results.txt
+│       ├── reports/
+│       │   ├── .gitkeep
+│       │   └── report.md
+│       ├── screenshots/
+│       │   ├── .gitkeep
+│       │   ├── 100.png
+│       │   ├── 101.png
+│       │   └── 103.png
+│       ├── src/
+│       │   ├── main.cpp
+│       │   └── README.md
+│       └── README.md
+│
+├── secure_application/                   # [Lab 3 Module]
 │   └── src/
 │       ├── app.py
 │       ├── vulnerable_app.py
 │       ├── secure_app.py
 │       └── database.py
 │
-├── classical/                     # [Lab 1 Base Directory]
-├── math/
+├── classical/                            # [Lab 1 Base Directory]
 ├── modern/
 ├── datasets/
 ├── outputs/
