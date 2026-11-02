@@ -62,9 +62,9 @@ CryptoLabA3_Group14/
 │
 ├── maths/                                # [Lab Module - Cryptographic Mathematics]
 │   ├── Random_Generator/                 # [Lab 9 - CSPRNG Statistical Analysis]
-│   │   ├── screenshots/
-│   │   │   └── .gitkeep
-│   │   ├── .gitkeep
+│   │ 
+│   │ 
+│   ├── .gitkeep
 │   │   ├── README.md
 │   │   ├── analyze_randomness.ipynb
 │   │   └── generate_random_data.py
