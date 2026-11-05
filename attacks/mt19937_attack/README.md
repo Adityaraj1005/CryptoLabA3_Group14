@@ -13,6 +13,7 @@ This module demonstrates the severe cryptographic vulnerabilities of non-cryptog
 ```bash
 python part_a_stream_cipher.py
 ```
+### Run Part B (Password Reset Token Prediction):
 ```bash
 python part_b_token_prediction.py
 ```
