@@ -59,6 +59,13 @@ CryptoLabA3_Group14/
 │       ├── reports/
 │       │   └── Assignment_4_Report.pdf
 │       └── README.md
+|    └── mt19937_attack/                     # [Lab 10 - MT19937 Attacks]
+│       ├── screenshots/
+│       │   └── .gitkeep
+│       ├── .gitkeep
+│       ├── README.md
+│       ├── part_a_stream_cipher.py
+│       └── part_b_token_prediction.py
 │
 ├── maths/                                # [Lab Module - Cryptographic Mathematics]
 │   ├── Random_Generator/                 # [Lab 9 - CSPRNG Statistical Analysis]
